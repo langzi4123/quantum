@@ -2,6 +2,9 @@ source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 behave mswin
 
+:set ts=4
+:set expandtab
+:%retab!
 set encoding=utf-8
 set nocompatible  
 set number  
@@ -24,6 +27,8 @@ filetype plugin indent on
 set diffexpr=MyDiff()
 function MyDiff()
   let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
   let arg1 = v:fname_in
   if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
   let arg2 = v:fname_new
